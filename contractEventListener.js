@@ -4,7 +4,7 @@ require("dotenv").config();
 
 const NFTCollection = require("./models/NFTCollection");
 const marketplaceArtifact = require("./Marketplace.json");
-const contractAddress = "";
+const contractAddress = "0x3185619aD5192b0f728f4874F92A630d0793E179";
 
 const emptyDatabase = async () => {
   try {
@@ -15,7 +15,9 @@ const emptyDatabase = async () => {
   }
 };
 // TODO: Update this json rpc provider
-const provider = new ethers.providers.JsonRpcProvider();
+const provider = new ethers.providers.JsonRpcProvider(
+  process.env.ALCHEMY_URL_RINKEBY
+);
 
 const contract = new ethers.Contract(
   contractAddress,
@@ -29,8 +31,6 @@ const contract = new ethers.Contract(
     useUnifiedTopology: true,
   });
   console.log("DB connected successfully from EListener");
-  // TODO: Remove this on production.
-  // await emptyDatabase();
 
   contract.on("NewBid", async (bidder, owner, price, erc721, tokenId) => {
     price = ethers.utils.formatEther(price);
