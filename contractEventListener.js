@@ -14,10 +14,8 @@ const emptyDatabase = async () => {
     console.log("Couldn't delete data!");
   }
 };
-// TODO: Update this json rpc provider
-const provider = new ethers.providers.JsonRpcProvider(
-  process.env.ALCHEMY_URL_RINKEBY
-);
+
+const provider = new ethers.providers.JsonRpcProvider(process.env.RINKEBY_URL);
 
 const contract = new ethers.Contract(
   contractAddress,
