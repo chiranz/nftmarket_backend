@@ -27,10 +27,10 @@ const CONSTANTS = {
   },
 };
 
-const provider = new ethers.providers.JsonRpcProvider(CONSTANTS.fantom.rpc);
+const provider = new ethers.providers.JsonRpcProvider(CONSTANTS.rinkeby.rpc);
 
 const contract = new ethers.Contract(
-  CONSTANTS.fantom.contractAddress,
+  CONSTANTS.rinkeby.contractAddress,
   marketplaceArtifact.abi,
   provider
 );
