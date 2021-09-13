@@ -13,6 +13,7 @@ const {
   handleNewOffer,
   handleSale,
   updateBlock,
+  emptyDatabase,
 } = require("./helpers");
 
 const CONSTANTS = {
@@ -24,15 +25,6 @@ const CONSTANTS = {
     contractAddress: "0xC437B3FF25930C3A013f34ca178696dAed5265c0",
     rpc: "https://rpc.ftm.tools/",
   },
-};
-
-const emptyDatabase = async () => {
-  try {
-    await NFTCollection.deleteMany({});
-    console.log("Database has be emptied!");
-  } catch {
-    console.log("Couldn't delete data!");
-  }
 };
 
 const provider = new ethers.providers.JsonRpcProvider(CONSTANTS.fantom.rpc);
@@ -48,6 +40,9 @@ const contract = new ethers.Contract(
     useNewUrlParser: true,
     useUnifiedTopology: true,
   });
+  //TODO:  Remove this on prod.
+  await emptyDatabase();
+
   console.log("DB connected successfully from EListener");
   const currentBlockNumber = await provider.getBlockNumber();
 

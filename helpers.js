@@ -2,6 +2,16 @@ const ethers = require("ethers");
 const NFTCollection = require("./models/NFTCollection");
 const Block = require("./models/Block");
 
+const emptyDatabase = async () => {
+  try {
+    await NFTCollection.deleteMany({});
+    await Block.deleteMany({});
+    console.log("Database has be emptied!");
+  } catch {
+    console.log("Couldn't delete data!");
+  }
+};
+
 const handleNewBid = async (bidder, owner, price, erc721, tokenId, args) => {
   price = ethers.utils.formatEther(price);
   try {
@@ -90,4 +100,5 @@ module.exports = {
   handleSale,
   handleNewOffer,
   updateBlock,
+  emptyDatabase,
 };
