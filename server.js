@@ -52,7 +52,7 @@ app.get("/wallet/:walletAddress", async (req, res) => {
 
 app.listen(PORT, async () => {
   console.log(`Server listening on port ${PORT}`);
-  await mongoose.connect(process.env.MONGO_URI, {
+  await mongoose.connect(process.env.MONGO_URI_FTM, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   });
